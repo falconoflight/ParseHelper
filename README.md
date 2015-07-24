@@ -8,11 +8,11 @@ Wrapper for Parse Integration
 
 # Install
 To use this class without Facebook you will have to create a pod file and add 
-         
+
           pod 'Parse'
 
 If you want to use Facebook you will have to create a pod file and add
-          
+
           pod 'Parse'
           pod 'ParseFacebookUtilsV4'
 
@@ -51,7 +51,7 @@ I have included Facebook and Twitter Integration by default but if you want to r
         // Error Occured
         println(error)
       }
-    }
+    })
 
 **Log a user in**
 
@@ -63,7 +63,7 @@ I have included Facebook and Twitter Integration by default but if you want to r
         // Error Occured
         println(errorMesssage)
       }
-    }
+    })
     
 **Send password reset email**
 
@@ -75,3 +75,4 @@ I have included Facebook and Twitter Integration by default but if you want to r
         // Error Occured
         println(errorMesssage)
       }
+    })
