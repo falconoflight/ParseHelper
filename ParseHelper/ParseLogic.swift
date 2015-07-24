@@ -299,13 +299,14 @@ class ParseLogic: NSObject {
     Saves a object to local data storage
     */
     
-    func saveObjectToLocalDataStorage(className:String, parameters:[String:AnyObject], pinName:String, completion:((success:Bool, errorMesssage:String?)->Void)?) {
+    func saveObjectToLocalDataStorage(className:String, pinName:String, parameters:[String:AnyObject]?, completion:((success:Bool, errorMesssage:String?)->Void)?) {
         let objectClass = PFObject(className: className)
 
-        for parameter in parameters {
-            objectClass[parameter.0] = parameter.1
+        if parameters != nil {
+            for parameter in parameters! {
+                objectClass[parameter.0] = parameter.1
+            }
         }
-        
 
         objectClass.pinInBackgroundWithName(pinName, block: { (success, error) -> Void in
             if error == nil {
@@ -324,9 +325,16 @@ class ParseLogic: NSObject {
     Retrieves objects from local data storage
     */
     
-    func retrieveObjectsFromLocalDataStorage(className:String, pinName:String, completion:(success:Bool, errorMesssage:String?, result:[AnyObject]?)->Void) {
+    func retrieveObjectsFromLocalDataStorage(className:String, pinName:String, parameters:[String:AnyObject]?, completion:(success:Bool, errorMesssage:String?, result:[AnyObject]?)->Void) {
         let query = PFQuery(className: className)
         query.fromPinWithName(pinName)
+        
+        if parameters != nil {
+            for parameter in parameters! {
+                query.whereKey(parameter.0, equalTo: parameter.1)
+            }
+        }
+        
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
                 completion(success: true, errorMesssage: nil, result: objects)
@@ -388,6 +396,21 @@ class ParseLogic: NSObject {
                 }
             })
         }
+    }
+    
+    /**
+    Convert UIImage to PFFile so you can save it in Parse
+    */
+    
+    func imageToPFFile(image:UIImage, withName name:String?) -> PFFile {
+        let imageData = UIImageJPEGRepresentation(image, 0)!
+        let imageFile: PFFile!
+        if name != nil {
+            imageFile = PFFile(name:name, data:imageData)
+        } else {
+            imageFile = PFFile(data: imageData)
+        }
+        return imageFile
     }
 }
 
