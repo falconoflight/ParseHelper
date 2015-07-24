@@ -9,7 +9,6 @@
 import UIKit
 import Parse
 import ParseFacebookUtilsV4
-import Bolts
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
