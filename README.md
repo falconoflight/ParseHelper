@@ -2,22 +2,31 @@
 Wrapper for Parse Integration
 
 # TO-DO
+
 -Parse Relationships
 -Easier way to upload PFFiles or photos to Parse
 
 # Install
 To use this class without Facebook you will have to create a pod file and add 
+         
           pod 'Parse'
 
 If you want to use Facebook you will have to create a pod file and add
+          
           pod 'Parse'
           pod 'ParseFacebookUtilsV4'
 
 If you wish not to use Facebook see Configure section
 
+**Remember to add 'use_frameworks!'**
+
 # Configure
 In your AppDelegate.swift file you will have to add
+
+          // To enable local storage
           Parse.enableLocalDatastore()
+          
+          // Setup Parse
           Parse.setApplicationId("ENTER YOUR APPLICATION ID", clientKey: "ENTER YOUR CLIENT KEY")
           
           // This is only needed if you plan on using Facebook with Parse
@@ -32,7 +41,7 @@ I have included Facebook and Twitter Integration by default but if you want to r
 
 # Usage
 
-# Create a new user
+**Create a new user**
 
     let parseLogic = ParseLogic.sharedInstance
     parseLogic.createUser("example@example.com", password: "password", confirmPassword: "password", parameters:["fullName": "Example Example"]) { (success, errorMesssage) -> Void in
@@ -44,7 +53,7 @@ I have included Facebook and Twitter Integration by default but if you want to r
       }
     }
 
-# Log a user in
+**Log a user in**
 
     let parseLogic = ParseLogic.sharedInstance
     parseLogic.logInUser("example@example.com", password: "password") { (success, errorMesssage) -> Void in
@@ -56,7 +65,7 @@ I have included Facebook and Twitter Integration by default but if you want to r
       }
     }
     
-# Send password reset email
+**Send password reset email**
 
     let parseLogic = ParseLogic.sharedInstance
     parseLogic.sendForgotPasswordEmail("example@example.com", completion: { (success, errorMesssage) -> Void in
