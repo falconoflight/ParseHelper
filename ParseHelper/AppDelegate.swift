@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Parse
+import ParseFacebookUtilsV4
+import Bolts
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        Parse.enableLocalDatastore()
+        
+        Parse.setApplicationId("ENTER YOUR APPLICATION ID",
+            clientKey: "ENTER YOUR CLIENT KEY")
+        
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+        
+        PFTwitterUtils.initializeWithConsumerKey("YOUR CONSUMER KEY", consumerSecret: "YOUR CONSUMER SECRET")
+        
         return true
     }
 
